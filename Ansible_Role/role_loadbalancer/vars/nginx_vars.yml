@@ -60,8 +60,9 @@ nginx_rproxy_config: |-
 nginx_document_root: /var/www/html
 lb_location: "/"
 domain_name: example.com
-rproxy_access_log: "/var/log/nginx/{{ rproxy_conf_file }}_access.log main"
-rproxy_error_log: "/var/log/nginx/{{ rproxy_conf_file }}_error.log"
+site_conf_file: "example.conf"
+rproxy_access_log: "/var/log/nginx/{{ site_conf_file }}_access.log main"
+rproxy_error_log: "/var/log/nginx/{{ site_conf_file }}_error.log"
 nginx_sites_location_dir: "/etc/nginx/sites-enabled"
 lb_type: "least_conn"
 upstream_servers:

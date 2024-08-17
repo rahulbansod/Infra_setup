@@ -1,6 +1,6 @@
 upstream {{ nginx_upstream_name }} {
-{{ upstream_servers.server1|regex_replace("[^A-Za-z0-9_.-]", " ") }};
-{{ upstream_servers.server2|regex_replace("[^A-Za-z0-9_.-]", " ") }};
+{{ upstream_servers.server1|regex_replace("[^A-Za-z0-9_.-:]", " ") }};
+{{ upstream_servers.server2|regex_replace("[^A-Za-z0-9_.-:]", " ") }};
 }
 
 server {
