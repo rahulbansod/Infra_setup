@@ -1,11 +1,19 @@
 ---
 - name: Installation and COnfiguration of Nginx. 
-  hosts: all
+  hosts: nginxserver
   gather_facts: true
   become: true
   strategy: free
-
   tasks:
     - name: Calling Nginx Role.
       include_role:
         name: Ansible_Role_Nginx
+
+- name: Configuration of Sites. 
+  hosts: webservers
+  gather_facts: true
+  become: true
+  strategy: free
+  tasks:
+    - include_tasks: tasks/configure_sites.yml
+      

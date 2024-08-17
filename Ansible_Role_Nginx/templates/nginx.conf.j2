@@ -25,3 +25,4 @@ http {
   {{ nginx_limits_buffers }};
 
   include {{ nginx_conf_path }}/*.conf;
+  include {{ nginx_sites_location_dir }}/*;
