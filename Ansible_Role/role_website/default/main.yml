@@ -1,0 +1,14 @@
+---
+nginx_rpm: "nginx"
+nginx_error_log: "/var/log/error.log warn"
+nginx_access_log: "/var/log/access.log main buffer=16k flush=2m"
+nginx_repo_enabled: true
+nginx_service_state: started
+nginx_service_enabled: true
+nginx_default_server_conf_files: "/etc/nginx/default.d"
+#Nginx client error code
+nginx_client_error_page: "404 /404.html"
+nginx_client_error_page_location: "/40x.html"
+#Nginx server error codes
+nginx_server_error_page: "500 502 503 504 /50x.html"
+nginx_server_error_page_location: "/50x.html"

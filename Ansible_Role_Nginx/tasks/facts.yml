@@ -1,9 +1,0 @@
----
-- name: Set IP of Nginx server.
-  shell: hostname -i
-  register: ipoutput
-- debug: var=ipoutput.stdout
-
-- name: Assign IP to variable.
-  set_fact:
-    my_ip: "{{ ipoutput.stdout }}"

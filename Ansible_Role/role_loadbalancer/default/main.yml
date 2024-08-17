@@ -1,6 +1,5 @@
 ---
 nginx_rpm: "nginx"
-nginx_user: "nginx"
 nginx_error_log: "/var/log/error.log warn"
 nginx_access_log: "/var/log/access.log main buffer=16k flush=2m"
 nginx_repo_enabled: true

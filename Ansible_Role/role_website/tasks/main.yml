@@ -1,0 +1,8 @@
+---
+- include_vars: vars/nginx_vars.yml
+- include_tasks: tasks/nginx_install.yml
+- include_tasks: tasks/nginx_conf.yml
+- include_tasks: tasks/cert.yml
+- include_tasks: tasks/web.yml
+
+

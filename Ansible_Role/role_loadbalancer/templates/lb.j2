@@ -5,6 +5,7 @@ upstream {{ nginx_upstream_name }} {
 
 server {
    listen {{ server_ip }};
+   server_name {{ domain_name }};
    ssl_certificate {{ ssl_certificate }};
    ssl_certificate_key {{ ssl_certificate_key }};
    {{ rproxy_ssl_config|indent(2) }}
@@ -12,7 +13,7 @@ server {
    access_log {{ rproxy_access_log }};
    error_log {{ rproxy_error_log }};
 
-   location {{ rproxy_location }} {
+   location {{ lb_location }} {
    proxy_pass https://{{ nginx_upstream_name }};
    {{ nginx_rproxy_config|indent(2) }}
    }

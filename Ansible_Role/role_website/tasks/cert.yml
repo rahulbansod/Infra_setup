@@ -1,0 +1,24 @@
+---
+- name: Create folder if does not exists.
+  shell: mkdir /etc/nginx/cert
+  register: cert_dir
+  ignore_errors: true
+
+- name: generate self signed key.
+  openssl_privatekey:
+    path: "{{ ssl_certificate_key }}"
+    size: 2048 
+
+- name: generate self signed csr.    
+  openssl_csr:
+    path: "{{ ssl_certificate_csr }}"
+    privatekey_path: "{{ ssl_certificate_key }}"
+
+- name: generate self signed cert.
+  openssl_certificate:
+    provider: selfsigned
+    selfsigned_not_after: "+3650d"
+    path: "{{ ssl_certificate }}"
+    privatekey_path: "{{ ssl_certificate_key }}"
+    csr_path: "{{ ssl_certificate_csr }}"
+    

@@ -1,6 +1,0 @@
----
-- include_vars: vars/nginx_vars.yml
-- include_tasks: tasks/facts.yml
-- include_tasks: tasks/cert.yml
-- include_tasks: tasks/nginx_conf.yml
-

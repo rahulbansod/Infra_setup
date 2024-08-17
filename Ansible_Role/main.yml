@@ -1,0 +1,20 @@
+---
+- name: Configuration of Nginx load balancer.
+  hosts: load_balancer
+  gather_facts: true
+  become: true
+  strategy: free
+  tasks:
+    - name: Calling load balancer Role.
+      include_role:
+        name: role_loadbalancer
+        
+- name: Configuration of Sites for load balancer.
+  hosts: web_servers
+  gather_facts: true
+  become: true
+  strategy: free
+  tasks:
+    - name: Calling Website Role.
+      include_role:
+        name: role_website

@@ -1,4 +1,4 @@
-user {{ nginx user }};
+user {{ nginx_user }};
 worker_processes {{ nginx_worker_processes }};
 error_log {{ nginx_error_log }};
 pid /run/nginx.pid;
@@ -32,7 +32,7 @@ http {
 #        server_name  _;
 #        root         /usr/share/nginx/html;
 #        
-#         Load configuration files for the default server block.
+#        Load configuration files for the default server block.
 #        include /etc/nginx/default.d/*.conf;
 #
 #        location / {
