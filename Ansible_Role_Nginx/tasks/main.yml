@@ -1,0 +1,5 @@
+---
+- include_vars: vars/nginx_vars.yml
+- include_tasks: tasks/nginx_repo.yml
+- include_tasks: tasks/nginx_conf.yml
+- include_tasks: tasks/rproxy.yml

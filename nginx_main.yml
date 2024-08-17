@@ -1,0 +1,11 @@
+---
+- name: Installation and COnfiguration of Nginx. 
+  hosts: all
+  gather_facts: true
+  become: true
+  strategy: free
+
+  tasks:
+    - name: Calling Nginx Role.
+      include_role:
+        name: Ansible_Role_Nginx

@@ -1,0 +1,16 @@
+upstream {{ nginx_upstream_name }} {
+{{ upstream_servers.server1|regex_replace("[^A-Za-z0-9_.-]", " ") }};
+{{ upstream_servers.server2|regex_replace("[^A-Za-z0-9_.-]", " ") }};
+}
+
+server {
+   listen {{ server_ip }};
+   {{ rproxy_ssl_config|indent(2) ))
+
+   access_log {{ rproxy_access_log }};
+   error_log {{ rproxy_error_log }};
+
+   location {{ rproxy_location}}{{ app_location_dir }} {
+   proxy_pass https://{{ nginx_upstream_name }};
+   {{ nginx_rproxy_config|indent(2) }}
+   }

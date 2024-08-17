@@ -1,0 +1,32 @@
+---
+- name: Set IP of Nginx server.
+  shell: ifconfig | grep "inet " | grep -v 127 | awk '{print $2}'
+  register: ipoutput
+- debug: var=ipoutput.stdout
+
+- name: Assign IP to variable.
+  set_fact:
+    server_ip: "{{ ipoutput.stdout }}:{{ nginx_listen_port_ipv4_ssl }}"
+  
+- name: Check if file exist or not.
+  stat: 
+    path: "{{ nginx_conf_path }}/{{ rproxy_conf_file }}"
+  register: conf_result
+
+- name: Create rever proxy config file if not exists.
+  file: 
+    path: "{{ nginx_conf_path }}/{{ rproxy_conf_file }}"
+    state: touch
+  when: not conf_result.stat.exists
+  failed_when: conf_result.stat.exists
+
+- name: Copy reverse proxy configuration in place.
+  template:
+    src: "{{ rproxy_conf_template }}"
+    dest: "{{ nginx_conf_path}}/{{ rproxy_conf_file }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify: 
+    - validate config
+    - reload nginx
