@@ -1,0 +1,14 @@
+---
+#Nginx Setup
+
+- name: Ensure Nginx package is installed.
+  package:
+    name: "{{ nginx_rpm }}"
+    state: present
+    update_cache: yes
+
+- name: Ensure nginx service is running as configured
+  service:
+    name: nginx
+    state: "{{ nginx_service_state }}"
+    enabled: "{{ nginx_service_enabled }}"

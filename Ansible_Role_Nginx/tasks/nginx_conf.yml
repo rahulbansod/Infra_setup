@@ -1,5 +1,4 @@
 ---
-#Nginx Setup
 - name: Copy nginx configuration in place.
   template:
     src: "{{ nginx_conf_template }}"
@@ -10,9 +9,3 @@
   notify:
     - validate config
     - reload nginx
-
-- name: Ensure nginx service is running as configured
-  service:
-    name: nginx
-    state: "{{ nginx_service_state }}"
-    enabled: "{{ nginx_service_enabled }}"

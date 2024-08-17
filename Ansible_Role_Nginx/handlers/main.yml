@@ -13,8 +13,3 @@
   shell: nginx -t
   changed_when: false
   listen: validate config
-
-- name: restart apache
-  service:
-    name: httpd
-    state: restarted

@@ -1,0 +1,6 @@
+[load_balancer]
+redhat3.example.com
+
+[web_servers]
+redhat1.example.com
+redhat2.example.com

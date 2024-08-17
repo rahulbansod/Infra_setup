@@ -1,0 +1,44 @@
+---
+- name: Configure NGINX load balancer
+  hosts: load_balancer
+  become: yes
+
+# Nginx configuration.   
+- include_tasks: tasks/nginx_install.yml
+
+- name: Set IP of Nginx server.
+  shell: hostname -i
+  register: ipoutput
+- debug: var=ipoutput.stdout
+
+- name: Assign IP to variable.
+  set_fact:
+    server_ip: "{{ ipoutput.stdout }}:{{ nginx_listen_port_ipv4_ssl }}"
+  
+- name: create folder if not exists.
+  shell: mkdir {{ item }}
+  with_items: 
+    - /etc/nginx/sites-available
+    - /etc/nginx/sites-enabled
+  ignore_errors: true
+
+- name: Copy configuration in place.
+  template:
+    src: "{{ rproxy_conf_template }}"
+    dest: "/etc/nginx/sites-available/nginx.cfg"
+    owner: root
+    group: root
+    mode: 0644
+  notify: 
+    - validate config
+    - reload nginx
+
+- name: Create symlink
+  file:
+    src: /etc/nginx/sites-available/nginx.cfg
+    dest: /etc/nginx/sites-enabled/default
+    state: link
+  notify: 
+    - validate config
+    - reload nginx
+

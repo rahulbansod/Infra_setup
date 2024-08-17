@@ -1,0 +1,13 @@
+---
+- name: Configure web servers.
+  hosts: web_servers
+  become: yes
+  
+  tasks:
+    - include_tasks: tasks/nginx_install.yml
+    
+    - name: Create a simple web page
+      template:
+        src: index.j2
+        dest: /var/www/html/index.html
+      notify: restart nginx
