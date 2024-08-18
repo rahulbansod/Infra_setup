@@ -1,6 +1,6 @@
 ---
 - name: Create folder if does not exists.
-  shell: mkdir /etc/nginx/cert
+  shell: mkdir "{{ ssl_cert_location }}"
   register: cert_dir
   ignore_errors: true
 

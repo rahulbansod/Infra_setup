@@ -55,9 +55,10 @@ nginx_log_format: |-
   '"$http_user_agent" "$http_x_forwarded_for"' '"$server_port" "$remote_port"'
 
 #Reverse Proxy Variable
-ssl_certificate: /etc/nginx/cert/server.crt
-ssl_certificate_key: /etc/nginx/cert/server.key
-ssl_certificate_csr: /etc/nginx/cert/server.csr
+ssl_cert_location: "/etc/nginx/cert"
+ssl_certificate: "{{ ssl_cert_location }}/server.crt"
+ssl_certificate_key: "{{ ssl_cert_location }}/server.key"
+ssl_certificate_csr: "{{ ssl_cert_location }}/server.csr"
 
 rproxy_ssl_config: |-
   ssl_session_cache shared:SSL:1m;
