@@ -1,5 +1,5 @@
 ---
-- include_tasks: tasks/nginx_conf.yml
+- include_tasks: tasks/nginx_conf_lb.yml
 - include_tasks: tasks/lb.yml
 
 

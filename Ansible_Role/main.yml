@@ -6,7 +6,8 @@
     - var/nginx_vars.yml
   tasks:
     - name: Calling load balancer Role.
-      include_role: role_common
+      include_role: 
+        name: role_common
 
 - name: Configuration of Nginx load balancer.
   hosts: load_balancer
@@ -15,7 +16,8 @@
     - var/nginx_vars.yml
   tasks:
     - name: Calling load balancer Role.
-      include_role: role_loadbalancer
+      include_role: 
+        name: role_loadbalancer
         
 - name: Configuration of Sites for backend servers.
   hosts: web_servers
@@ -24,4 +26,5 @@
     - var/nginx_vars.yml
   tasks:
     - name: Calling Website Role.
-      include_role: role_website
+      include_role: 
+        name: role_website
