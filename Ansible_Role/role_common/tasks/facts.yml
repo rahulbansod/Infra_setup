@@ -1,0 +1,13 @@
+---
+- name: Set IP of Nginx server.
+  shell: hostname -i
+  register: ipoutput
+- debug: var=ipoutput.stdout
+
+- name: Assign IP to variable.
+  set_fact:
+    my_ip: "{{ ipoutput.stdout }}"
+
+- name: Assign IP to variable for SSL.
+  set_fact:
+    server_ip: "{{ ipoutput.stdout }}:{{ nginx_listen_port_ipv4_ssl }}"

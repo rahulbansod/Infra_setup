@@ -1,7 +1,6 @@
 ---
-
 - name: Create a simple web page.
   template:
-    src: index.j2
-    dest: /var/www/html/index.html
+    src: "{{ web_page_template }}"
+    dest: "{{ nginx_document_root }}/index.html"
   notify: restart nginx

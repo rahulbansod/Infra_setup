@@ -1,20 +1,27 @@
 ---
 - name: Configuration of Nginx load balancer.
-  hosts: load_balancer
-  gather_facts: true
+  hosts: all
   become: true
-  strategy: free
+  vars_files:
+    - var/nginx_vars.yml
   tasks:
     - name: Calling load balancer Role.
-      include_role:
-        name: role_loadbalancer
-        
-- name: Configuration of Sites for load balancer.
-  hosts: web_servers
-  gather_facts: true
+      include_role: role_common
+
+- name: Configuration of Nginx load balancer.
+  hosts: load_balancer
   become: true
-  strategy: free
+  vars_files:
+    - var/nginx_vars.yml
+  tasks:
+    - name: Calling load balancer Role.
+      include_role: role_loadbalancer
+        
+- name: Configuration of Sites for backend servers.
+  hosts: web_servers
+  become: true
+  vars_files:
+    - var/nginx_vars.yml
   tasks:
     - name: Calling Website Role.
-      include_role:
-        name: role_website
+      include_role: role_website

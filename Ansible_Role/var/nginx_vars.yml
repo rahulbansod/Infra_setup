@@ -2,34 +2,38 @@
 #Nginx Variables
 nginx_user: "nginx"
 nginx_rpm: "nginx"
-nginx_conf_file_path: "/etc/nginx/nginx.conf"
 nginx_sendfile: "on"
 nginx_tcp_nopush: "on"
 nginx_tcp_nodelay: "on"
 nginx_gzip: "on"
-
+nginx_service_state: "started"
 nginx_error_log: "/var/log/error.log warn"
 nginx_access_log: "/var/log/access.log main buffer=16k flush=2m"
-nginx_repo_enabled: true
-nginx_service_state: started
-nginx_service_enabled: true
-nginx_default_server_conf_files: "/etc/nginx/default.d"
+nginx_repo_enabled: "true"
+nginx_service_enabled: "true"
+
 #Nginx client error code
 nginx_client_error_page: "404 /404.html"
 nginx_client_error_page_location: "/40x.html"
+
 #Nginx server error codes
 nginx_server_error_page: "500 502 503 504 /50x.html"
 nginx_server_error_page_location: "/50x.html"
 
 #Nginx Template Variable
-nginx_conf_template: "nginx.conf.j2"
+nginx_conf_template_lb: "nginx.conf_lb.j2"
+nginx_conf_template_web: "nginx.conf_web.j2"
 lb_conf_template: "lb.j2"
+web_page_template: "index.j2"
+
 #Nginx config file location
 nginx_conf_path: "/etc/nginx/conf.d"
+nginx_mine_file_path: /etc/nginx/mime.types
+nginx_default_server_conf_files: "/etc/nginx/default.d"
+nginx_conf_file_path: /etc/nginx/nginx.conf
 
 nginx_worker_processes: auto
 nginx_worker_connections: 1024
-nginx_mine_file_path: /etc/nginx/mime.types
 
 #Nginx timeouts
 nginx_timeouts: |-
@@ -39,10 +43,10 @@ nginx_timeouts: |-
   send_timeout 10;
 
 #Listening ports
-nginx_listen_port_ipv4: "80 default_server"
-nginx_listen_port_ipv6: "[::]:80 default_server"
-nginx_listen_port_ipv4_ssl: "443 ssl default_server"
-nginx_listen_port_ipv6_ssl: "[::]:443 ssl default_server"
+nginx_listen_port_ipv4: "80"
+nginx_listen_port_ipv6: "[::]:80"
+nginx_listen_port_ipv4_ssl: "443 ssl"
+nginx_listen_port_ipv6_ssl: "[::]:443 ssl"
 
 nginx_upstream_name: api_backend
 nginx_log_format: |-
@@ -78,7 +82,6 @@ domain_name: example.com
 site_conf_file: "example.conf"
 rproxy_access_log: "/var/log/nginx/{{ site_conf_file }}_access.log main"
 rproxy_error_log: "/var/log/nginx/{{ site_conf_file }}_error.log"
-nginx_sites_location_dir: "/etc/nginx/sites-enabled"
 lb_type: "least_conn"
 upstream_servers:
   server1:
@@ -86,9 +89,6 @@ upstream_servers:
   server2:
     - server redhat2.example.com:443
 
-nginx_sites_available_dir: /etc/nginx/sites-available
-nginx_sites_enabled_dir: /etc/nginx/sites-enabled
+nginx_sites_available_dir: "/etc/nginx/sites-available"
+nginx_sites_enabled_dir: "/etc/nginx/sites-enabled"
 nginx_index_file: "index.html index.htm"
-
-
-

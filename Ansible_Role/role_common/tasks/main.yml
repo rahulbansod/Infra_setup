@@ -1,0 +1,4 @@
+---
+- include_tasks: tasks/facts.yml
+- include_tasks: tasks/nginx_install.yml
+- include_tasks: tasks/cert.yml

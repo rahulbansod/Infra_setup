@@ -1,14 +1,5 @@
 ---
 # Nginx configuration.   
-- name: Set IP of Nginx server.
-  shell: hostname -i
-  register: ipoutput
-- debug: var=ipoutput.stdout
-
-- name: Assign IP to variable.
-  set_fact:
-    server_ip: "{{ ipoutput.stdout }}:{{ nginx_listen_port_ipv4_ssl }}"
-  
 - name: create folder if not exists.
   shell: mkdir {{ item }}
   with_items: 
