@@ -5,7 +5,7 @@
   vars_files:
     - var/nginx_vars.yml
   tasks:
-    - name: Calling load balancer Role.
+    - name: Calling common Role.
       include_role: 
         name: role_common
 
