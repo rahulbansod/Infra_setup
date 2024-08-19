@@ -1,9 +1,10 @@
 ---
 - name: Create folder if does not exists.
-  shell: mkdir "{{ ssl_cert_location }}"
+  file: 
+    path: "{{ ssl_cert_location }}"
+    state: directory
   register: cert_dir
-  ignore_errors: true
-
+  
 - name: generate self signed key.
   openssl_privatekey:
     path: "{{ ssl_certificate_key }}"
